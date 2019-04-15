@@ -23,13 +23,16 @@
 module sv_remapper_12k_top #(
 
   parameter DATA_WIDTH       = 8,
-  parameter IMAGE_KERNEL_12K = 64,
-  parameter IMG_WIDTH        = 4096,
-  parameter IMG_HEIGHT       = 3072	
+  parameter IMAGE_KERNEL_12K = 64
+  //parameter IMG_WIDTH        = 4096,
+  //parameter IMG_HEIGHT       = 3072	
 )(
 
   input  logic                  i_clk,
   input  logic                  i_aresetn,
+
+  input  logic [12:0]           WIDTH,
+  input  logic [12:0]           HEIGHT,
 
   input  logic [DATA_WIDTH-1:0] s_axis_tdata,
   input  logic                  s_axis_tvalid,
@@ -128,22 +131,26 @@ remapper_module #(
 m_axis_remapper #(
 
   .DATA_WIDTH       ( DATA_WIDTH       ),
-  .IMAGE_KERNEL_12K ( IMAGE_KERNEL_12K ),
-  .IMG_WIDTH        ( IMG_WIDTH        ),
-  .IMG_HEIGHT       ( IMG_HEIGHT       )
+  .IMAGE_KERNEL_12K ( IMAGE_KERNEL_12K )
+  //.IMG_WIDTH        ( IMG_WIDTH        ),
+  //.IMG_HEIGHT       ( IMG_HEIGHT       )
 
 ) remapper_transmitter (
 
-  .i_clk                   ( i_clk ),
-  .i_aresetn               ( i_aresetn ),
+  .i_clk                   ( i_clk                          ),
+  .i_aresetn               ( i_aresetn                      ),
+
+  .WIDTH                   ( WIDTH                          ),
+  .HEIGHT                  ( HEIGHT                         ),
+
 
   .i_image_kernel_remapped ( image_kernel_remapped_from_rem ),
-  .i_kernel_is_remapped    ( kernel_is_remapped_from_rem ),
+  .i_kernel_is_remapped    ( kernel_is_remapped_from_rem    ),
 
-  .m_axis_tdata            ( m_axis_tdata ),
-  .m_axis_tvalid           ( m_axis_tvalid ),
-  .m_axis_tuser            ( m_axis_tuser ),
-  .m_axis_tlast            ( m_axis_tlast )
+  .m_axis_tdata            ( m_axis_tdata                   ),
+  .m_axis_tvalid           ( m_axis_tvalid                  ),
+  .m_axis_tuser            ( m_axis_tuser                   ),
+  .m_axis_tlast            ( m_axis_tlast                   )
 
 );
 

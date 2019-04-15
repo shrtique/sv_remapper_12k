@@ -10,14 +10,17 @@
 module m_axis_remapper #(
 
   parameter DATA_WIDTH       = 8,
-  parameter IMAGE_KERNEL_12K = 64,
-  parameter IMG_WIDTH        = 4096,
-  parameter IMG_HEIGHT       = 3072
+  parameter IMAGE_KERNEL_12K = 64
+  //parameter IMG_WIDTH        = 4096,
+  //parameter IMG_HEIGHT       = 3072
 
 )(
 
   input  logic                                         i_clk,
   input  logic                                         i_aresetn,
+
+  input  logic [12:0]                                  WIDTH,
+  input  logic [12:0]                                  HEIGHT,
 
   input  logic [0:IMAGE_KERNEL_12K-1] [DATA_WIDTH-1:0] i_image_kernel_remapped,
   input  logic                                         i_kernel_is_remapped,
@@ -29,6 +32,13 @@ module m_axis_remapper #(
 
 );
 
+
+//ASSIGNING PARAMETERS
+logic [12:0] IMG_WIDTH;
+logic [12:0] IMG_HEIGHT;
+
+assign IMG_WIDTH  = WIDTH;
+assign IMG_HEIGHT = HEIGHT;
 
 //SIGNALS
 typedef enum logic [2:0] {IDLE, TUSER, KERNEL_TRANSMITTING, WAIT_FOR_NEW_KERNEL, TLAST} statetype;

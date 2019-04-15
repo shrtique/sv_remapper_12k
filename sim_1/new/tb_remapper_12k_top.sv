@@ -66,14 +66,17 @@ logic                  tlast_rem;
 sv_remapper_12k_top #(
 
   .DATA_WIDTH       ( DATA_WIDTH       ),
-  .IMAGE_KERNEL_12K ( IMAGE_KERNEL_12K ),
-  .IMG_WIDTH        ( WIDTH            ),
-  .IMG_HEIGHT       ( HEIGHT           )
+  .IMAGE_KERNEL_12K ( IMAGE_KERNEL_12K )
+  //.IMG_WIDTH        ( WIDTH            ),
+  //.IMG_HEIGHT       ( HEIGHT           )
 
 ) UUT (
 
   .i_clk         ( clk        ),
   .i_aresetn     ( aresetn    ),
+
+  .WIDTH         ( WIDTH      ),
+  .HEIGHT        ( HEIGHT     ),
 
   .s_axis_tdata  ( tdata      ),
   .s_axis_tvalid ( tvalid     ),
