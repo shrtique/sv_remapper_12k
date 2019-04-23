@@ -19,6 +19,7 @@ module s_axis_remapper #(
 
   input  logic [DATA_WIDTH-1:0]                        i_axis_tdata,
   input  logic                                         i_axis_tvalid,
+  input  logic                                         i_axis_tuser,
 
   output logic [0:IMAGE_KERNEL_12K-1] [DATA_WIDTH-1:0] o_image_kernel,
   output logic                                         o_kernel_is_ready,
@@ -77,7 +78,9 @@ always_ff @( posedge i_clk, negedge i_aresetn )
     if ( ~i_aresetn ) begin
       o_kernel_is_odd <= 1'b0;
     end else begin
-      if ( o_kernel_is_ready ) begin
+      if ( i_axis_tuser ) begin
+        o_kernel_is_odd <= 1'b0;
+      end else if ( o_kernel_is_ready ) begin
         o_kernel_is_odd <= ~o_kernel_is_odd;  
       end
     end	

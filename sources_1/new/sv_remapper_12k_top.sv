@@ -87,6 +87,7 @@ s_axis_remapper #(
 
   .i_axis_tdata      ( s_axis_tdata             ),
   .i_axis_tvalid     ( s_axis_tvalid            ),
+  .i_axis_tuser      ( s_axis_tuser             ),
 
   .o_image_kernel    ( image_kernel_from_rec    ),
   .o_kernel_is_ready ( kernel_is_ready_from_rec ),
