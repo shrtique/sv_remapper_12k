@@ -32,6 +32,8 @@
         input  logic                    i_sys_clk,
         input  logic                    i_sys_aresetn,
 
+        input  logic                    i_odd_kernel,  //when it's 1 kernel is odd, when it's 0 kernel is even;
+
         input  logic [DATA_WIDTH-1:0]   s_axis_tdata,
         input  logic                    s_axis_tvalid,
         input  logic                    s_axis_tuser,
@@ -156,6 +158,7 @@ logic [C_S00_AXI_DATA_WIDTH-1:0] slv_reg0;
 
       .WIDTH         ( img_width     ),
       .HEIGHT        ( img_height    ),
+      .i_odd_kernel  ( i_odd_kernel  ),
 
       .s_axis_tdata  ( s_axis_tdata  ),
       .s_axis_tvalid ( s_axis_tvalid ),

@@ -17,6 +17,8 @@ module s_axis_remapper #(
   input  logic                                         i_clk,
   input  logic                                         i_aresetn,
 
+  input  logic                                         i_odd_kernel,
+
   input  logic [DATA_WIDTH-1:0]                        i_axis_tdata,
   input  logic                                         i_axis_tvalid,
   input  logic                                         i_axis_tuser,
@@ -78,11 +80,7 @@ always_ff @( posedge i_clk, negedge i_aresetn )
     if ( ~i_aresetn ) begin
       o_kernel_is_odd <= 1'b0;
     end else begin
-      if ( i_axis_tuser ) begin
-        o_kernel_is_odd <= 1'b0;
-      end else if ( o_kernel_is_ready ) begin
-        o_kernel_is_odd <= ~o_kernel_is_odd;  
-      end
+      o_kernel_is_odd <= i_odd_kernel;
     end	
   end 	
 

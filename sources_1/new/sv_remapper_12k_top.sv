@@ -33,6 +33,7 @@ module sv_remapper_12k_top #(
 
   input  logic [12:0]           WIDTH,
   input  logic [12:0]           HEIGHT,
+  input  logic                  i_odd_kernel,
 
   input  logic [DATA_WIDTH-1:0] s_axis_tdata,
   input  logic                  s_axis_tvalid,
@@ -84,6 +85,8 @@ s_axis_remapper #(
 
   .i_clk             ( i_clk                    ),
   .i_aresetn         ( i_aresetn                ),
+
+  .i_odd_kernel      ( i_odd_kernel             ),
 
   .i_axis_tdata      ( s_axis_tdata             ),
   .i_axis_tvalid     ( s_axis_tvalid            ),
